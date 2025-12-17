@@ -5,11 +5,10 @@ import yt_dlp
 import threading
 import os
 import sys
-from PIL import Image # <-- ADDED IMPORT FOR LOGO
+
 
 ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("blue") # We will override this manually
-
+ctk.set_default_color_theme("blue")
 # --- Define our new red colors ---
 RED_NORMAL = "#E53E3E"
 RED_HOVER = "#C53030"
@@ -22,20 +21,7 @@ class YouTubeDownloader(ctk.CTk):
         self.geometry("600x550") 
         self.resizable(False, False)
 
-        # --- (OPTIONAL) SET WINDOW ICON ---
-        # 1. Get a .ico file (e.g., "logo.ico") and place it in your folder
-        # 2. Uncomment the line below:
-        # self.iconbitmap("logo.ico")
-        # 3. See the new pyinstaller command at the end.
-
-        # --- (OPTIONAL) ADD IN-APP LOGO ---
-        # 1. Get a .png file (e.g., "logo.png") and place it in your folder
-        # 2. Uncomment the 3 lines below:
-        # self.logo_image = ctk.CTkImage(light_image=Image.open("logo.png"),
-        #                                dark_image=Image.open("logo.png"),
-        #                                size=(48, 48))
-        # self.logo_label = ctk.CTkLabel(self, image=self.logo_image, text="")
-        # self.logo_label.pack(pady=(10, 0))
+    
 
 
         # --- UI Elements ---
@@ -239,4 +225,5 @@ class YouTubeDownloader(ctk.CTk):
 
 if __name__ == "__main__":
     app = YouTubeDownloader()
+
     app.mainloop()
