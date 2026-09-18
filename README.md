@@ -1,194 +1,103 @@
-<h1 align="center">🔴 PyRed YouTube Downloader & Clipper</h1>
+# 🔴 PyRed — YouTube Downloader & Clipper
 
-<p align="center">
-<b><i>A professional, dark-themed desktop application built with Python.</i></b><br>
-Download YouTube videos and audio in high quality with a modern <b>Red & Dark UI</b>.
-</p>
+A desktop YouTube video/audio downloader with a dark, red-accented UI, built in Python with **CustomTkinter** and powered by **yt-dlp**.
 
-<hr>
+> ⚠️ Educational project. Only download content you have the right to download, and respect YouTube's Terms of Service and applicable copyright law.
 
-<h2>✨ Features Showcase</h2>
+---
 
-<h3>🎨 Modern Dark Interface</h3>
-<ul>
-  <li>Built using <b>CustomTkinter</b></li>
-  <li>Custom <b>Red Theme (#E53E3E)</b></li>
-  <li>Automatic Windows 11 red title bar integration</li>
-</ul>
+## Features
 
-<p align="center">
-<img src="main_ui.png" alt="Main Interface">
-</p>
+- **Video downloads** from 720p up to 4K (2160p), via yt-dlp
+- **Audio-only extraction** to MP3 / M4A, including high-bitrate options
+- **Video clipping** — grab video length, then pick a start/end range with sliders instead of downloading the whole video
+- **Live progress bar** with downloads running on a background thread, so the UI never freezes
+- **Custom dark/red theme**, with an accent color of `#E53E3E`, and a red title bar on Windows 11
 
-<hr>
+---
 
-<h3>🎞️ High-Quality Video Support</h3>
-<ul>
-  <li>Supports <b>720p → 4K (2160p)</b></li>
-  <li>Powered by <b>yt-dlp</b></li>
-</ul>
+## Requirements
 
-<p align="center">
-<img src="video_quality.png" alt="Video Quality">
-</p>
+| Requirement | Notes |
+|---|---|
+| Python 3.10+ | [python.org](https://www.python.org) |
+| FFmpeg | Required for merging video+audio and for clipping — the app will not run without it |
 
-<hr>
+Python packages: `customtkinter`, `yt-dlp` (installed below).
 
-<h3>🎵 Flexible Audio Extraction</h3>
-<ul>
-  <li>Audio-only downloads</li>
-  <li>Formats: <b>MP3 / M4A</b></li>
-  <li>High-bitrate support</li>
-</ul>
+---
 
-<p align="center">
-<img src="audio_quality.png" alt="Audio Quality">
-</p>
+## Installation
 
-<hr>
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/srikar-up/youtube-download.git
+   cd youtube-download
+   ```
 
-<h3>✂️ Advanced Video Clipper</h3>
-<ol>
-  <li>Enable <b>"Video Clipping"</b></li>
-  <li>Click <b>"Get Video Length"</b></li>
-  <li>Use interactive sliders to select start & end time</li>
-</ol>
+2. **(Recommended) Create a virtual environment**
+   ```bash
+   python -m venv venv
 
-<p align="center">
-<img src="cliping.png" alt="Clipping Tool">
-</p>
+   # Windows
+   venv\Scripts\activate
 
-<hr>
+   # macOS / Linux
+   source venv/bin/activate
+   ```
 
-<h3>🚀 Real-Time Progress</h3>
-<ul>
-  <li>Threaded background downloads</li>
-  <li>UI remains responsive</li>
-  <li>Live progress bar updates</li>
-</ul>
+3. **Install dependencies**
+   ```bash
+   pip install customtkinter yt-dlp
+   ```
 
-<hr>
+4. **Set up FFmpeg** (critical — the app depends on this)
+   - Download an FFmpeg "Essentials" build from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/)
+   - Extract the ZIP and open the `bin` folder
+   - Copy `ffmpeg.exe`
+   - Place it in the same folder as `hlo.py`:
+     ```
+     youtube-download/
+     ├── ffmpeg.exe   <-- required
+     ├── hlo.py       <-- main script
+     └── README.md
+     ```
 
-<h2>🛠️ Prerequisites</h2>
+---
 
-<ul>
-  <li><b>Python 3.10+</b> – https://www.python.org</li>
-  <li><b>FFmpeg</b> (Required for merging & clipping)</li>
-</ul>
+## Usage
 
-<hr>
-
-<h2>📦 Installation & Setup</h2>
-
-<h3>Step 1: Create Virtual Environment (Recommended)</h3>
-
-```bash
-python -m venv venv
- ```
-
-
-<b>Activate Environment</b>
-
-Windows:
-
-```bash
-venv\Scripts\activate
-```
-
-Mac / Linux:
-
-```bash
-source venv/bin/activate
-```
-
-<hr>
-
-<h3>Step 2: Install Dependencies</h3>
-
-```bash
-pip install customtkinter yt-dlp
-```
-
-<hr>
-
-<h3>Step 3: Setup FFmpeg (CRITICAL 🚨)</h3>
-
-<p><b>The app will not work without ffmpeg.exe</b></p>
-
-<ol>
-  <li>Download FFmpeg (Essentials build) from <b>gyan.dev</b></li>
-  <li>Open ZIP → go to <code>bin</code></li>
-  <li>Copy <code>ffmpeg.exe</code></li>
-  <li>Paste it next to <code>hlo.py</code></li>
-</ol>
-
-<pre>
-YouTubeDownloader/
-│
-├── ffmpeg.exe   &lt;-- REQUIRED
-├── hlo.py       &lt;-- Main Script
-└── README.md
-</pre>
-
-<hr>
-
-<h2>🚀 How to Run</h2>
+Run the app:
 
 ```bash
 python hlo.py
 ```
 
-<hr>
+Then:
 
-<h2>🎮 How to Use</h2>
+1. **Paste** a YouTube URL
+2. **Choose a format** — Video + Audio, Video Only, or Audio Only
+3. **Pick a quality** — 720p / 1080p / 4K, or an audio bitrate
+4. *(Optional)* **Clip the video**:
+   - Enable clipping
+   - Click "Get Video Length"
+   - Drag the sliders to set a start and end point
+5. **Download** and choose where to save the file
 
-<ul>
-  <li><b>Paste URL:</b> Insert YouTube link</li>
-  <li><b>Select Format:</b> Video + Audio / Video Only / Audio Only</li>
-  <li><b>Choose Quality:</b> 720p, 1080p, 4K or audio bitrate</li>
-  <li><b>Clip Video (Optional):</b>
-    <ul>
-      <li>Enable clipping</li>
-      <li>Get video length</li>
-      <li>Adjust sliders</li>
-    </ul>
-  </li>
-  <li><b>Download:</b> Choose save location</li>
-</ul>
+---
 
-<hr>
+## Troubleshooting
 
-<h2>⚠️ Troubleshooting</h2>
+| Problem | Fix |
+|---|---|
+| App crashes / FFmpeg error | Make sure `ffmpeg.exe` sits next to `hlo.py` |
+| Title bar isn't red | Only supported on Windows 11 |
+| Downloads are slow | Large 4K downloads can be throttled by YouTube — retry, or drop to a lower resolution |
+| `ModuleNotFoundError` | Run `pip install customtkinter yt-dlp` again inside your active virtual environment |
+| "Video unavailable" or extraction errors | yt-dlp needs regular updates to keep up with YouTube changes — run `pip install -U yt-dlp` |
 
-<b>FFmpeg Error / Crash</b>
+---
 
-<p>Ensure <code>ffmpeg.exe</code> is in the same folder as <code>hlo.py</code></p>
+## License
 
-<b>Title Bar Not Red</b>
-
-<p>Only supported on Windows 11</p>
-
-<b>Slow Downloads</b>
-
-<p>4K videos may be throttled — retry download</p>
-
-<b>ModuleNotFoundError</b>
-
-```bash
-pip install customtkinter yt-dlp
-```
-
-<hr>
-
-<h2>📄 License</h2>
-<p>Open-source project for educational purposes.</p>
-
-<hr>
-
-<h2>⚠️ Disclaimer</h2>
-<p>
-Respect YouTube’s Terms of Service and copyright laws.<br>
-Only download content you have permission to use.
-</p>
-```
-
+Released under the [MIT License](LICENSE). Provided for educational purposes only.
