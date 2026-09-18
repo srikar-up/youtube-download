@@ -1,0 +1,31 @@
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# Binaries & Media Tools
+ffmpeg.exe
+ffprobe.exe
+ffplay.exe
+ffmpeg/
+
+# PyInstaller & Build Output
+build/
+dist/
+*.spec
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary & Log files
+*.log

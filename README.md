@@ -1,8 +1,8 @@
 # 🔴 PyRed — YouTube Downloader & Clipper
 
-A desktop YouTube video/audio downloader with a dark, red-accented UI, built in Python with **CustomTkinter** and powered by **yt-dlp**.
+A modern desktop YouTube video/audio downloader and clipper with a dark, red-accented UI, built in Python with **CustomTkinter** and powered by **yt-dlp**.
 
-> ⚠️ Educational project. Only download content you have the right to download, and respect YouTube's Terms of Service and applicable copyright law.
+> ⚠️ **Educational project.** Only download content you have the right to download, and respect YouTube's Terms of Service and applicable copyright law.
 
 ---
 
@@ -10,11 +10,13 @@ A desktop YouTube video/audio downloader with a dark, red-accented UI, built in 
 
 ![Main Interface](main_ui.png)
 
-- **Video downloads** from 720p up to 4K (2160p), via yt-dlp
-- **Audio-only extraction** to MP3 / M4A, including high-bitrate options
-- **Video clipping** — grab video length, then pick a start/end range with sliders instead of downloading the whole video
-- **Live progress bar** with downloads running on a background thread, so the UI never freezes
-- **Custom dark/red theme**, with an accent color of `#E53E3E`, and a red title bar on Windows 11
+- **High-Quality Video Downloads**: 720p, 1080p (HD), 1440p (2K), up to 4K (2160p) via yt-dlp.
+- **Audio Extraction**: Direct MP3 extraction (128k, 192k, 320k high-bitrate) or native M4A.
+- **Video Clipping**: Fetch video duration, pick start and end timestamps via sliders or manual time inputs, and download only the trimmed section.
+- **Real-Time Determinate Progress Bar**: Tracks accurate percentage (0–100%), real-time download speed in MB/s, and ETA.
+- **Smart FFmpeg Detection**: Auto-detects FFmpeg from Windows system PATH (`winget`), the application folder, or PyInstaller package.
+- **Playlist Protection**: Prevents accidental batch downloads when pasting URLs containing `&list=`.
+- **Custom Dark Red Theme**: Sleek UI with Windows 11 title bar accent matching `#E53E3E`.
 
 | Video quality | Audio quality | Clipping |
 |---|---|---|
@@ -27,68 +29,80 @@ A desktop YouTube video/audio downloader with a dark, red-accented UI, built in 
 | Requirement | Notes |
 |---|---|
 | Python 3.10+ | [python.org](https://www.python.org) |
-| FFmpeg | Required for merging video+audio and for clipping — the app will not run without it |
+| FFmpeg | Required for merging video+audio and MP3 conversion |
 
-Python packages: `customtkinter`, `yt-dlp` (installed below).
+Python packages: `customtkinter`, `yt-dlp`, `pyinstaller` (defined in `requirements.txt`).
 
 ---
 
-## Installation
+## Installation & Setup
 
-1. **Clone the repo**
-   ```bash
+1. **Clone the repository**
+   ```powershell
    git clone https://github.com/srikar-up/youtube-download.git
    cd youtube-download
    ```
 
-2. **(Recommended) Create a virtual environment**
-   ```bash
+2. **Create and activate a virtual environment**
+   ```powershell
    python -m venv venv
-
-   # Windows
-   venv\Scripts\activate
-
-   # macOS / Linux
-   source venv/bin/activate
+   .\venv\Scripts\Activate.ps1
    ```
 
 3. **Install dependencies**
-   ```bash
-   pip install customtkinter yt-dlp
+   ```powershell
+   pip install -r requirements.txt
    ```
 
-4. **Set up FFmpeg** (critical — the app depends on this)
-   - Download an FFmpeg "Essentials" build from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/)
-   - Extract the ZIP and open the `bin` folder
-   - Copy `ffmpeg.exe`
-   - Place it in the same folder as `hlo.py`:
+4. **Install FFmpeg**
+   - **Recommended (Windows winget):**
+     ```powershell
+     winget install Gyan.FFmpeg
      ```
-     youtube-download/
-     ├── ffmpeg.exe   <-- required
-     ├── hlo.py       <-- main script
-     └── README.md
-     ```
+   - **Manual alternative:**
+     Download `ffmpeg.exe` from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/) and place `ffmpeg.exe` in the project root next to `hlo.py`.
+
+---
+
+## Running the App
+
+Run directly from Python:
+
+```powershell
+python hlo.py
+```
+
+---
+
+## Compiling Standalone `.exe`
+
+To package the application into a single standalone Windows executable (with no black console window):
+
+```powershell
+pyinstaller --noconsole --onefile --collect-all customtkinter --name "PyRed-Downloader" hlo.py
+```
+
+> **Note:** The `--collect-all customtkinter` flag is essential to ensure CustomTkinter's dark theme JSON files and fonts are bundled inside the `.exe`.
+
+Once compilation finishes, the executable will be located in:
+```
+dist\PyRed-Downloader.exe
+```
+
+You can move `PyRed-Downloader.exe` anywhere on your PC and run it directly!
 
 ---
 
 ## Usage
 
-Run the app:
-
-```bash
-python hlo.py
-```
-
-Then:
-
-1. **Paste** a YouTube URL
-2. **Choose a format** — Video + Audio, Video Only, or Audio Only
-3. **Pick a quality** — 720p / 1080p / 4K, or an audio bitrate
-4. *(Optional)* **Clip the video**:
-   - Enable clipping
-   - Click "Get Video Length"
-   - Drag the sliders to set a start and end point
-5. **Download** and choose where to save the file
+1. **Paste URL**: Enter any valid YouTube video link.
+2. **Choose Format**: Select **Video + Audio**, **Video Only**, or **Audio Only**.
+3. **Pick Quality**: Choose desired resolution (up to 4K) or audio bitrate.
+4. *(Optional)* **Clip Video**:
+   - Check **Enable Video Range Clipping**.
+   - Click **Fetch Video Duration**.
+   - Adjust the start and end sliders or type timestamps (`HH:MM:SS`).
+5. **Download**: Choose your output destination and click **Download Now**.
 
 ---
 
@@ -96,11 +110,9 @@ Then:
 
 | Problem | Fix |
 |---|---|
-| App crashes / FFmpeg error | Make sure `ffmpeg.exe` sits next to `hlo.py` |
-| Title bar isn't red | Only supported on Windows 11 |
-| Downloads are slow | Large 4K downloads can be throttled by YouTube — retry, or drop to a lower resolution |
-| `ModuleNotFoundError` | Run `pip install customtkinter yt-dlp` again inside your active virtual environment |
-| "Video unavailable" or extraction errors | yt-dlp needs regular updates to keep up with YouTube changes — run `pip install -U yt-dlp` |
+| FFmpeg warning / error | Install via `winget install Gyan.FFmpeg` or place `ffmpeg.exe` in the app directory |
+| Video extraction errors | YouTube frequently updates its site. Run `pip install -U yt-dlp` to keep the downloader up to date |
+| Red title bar not visible | Title bar color accenting is supported on Windows 11 |
 
 ---
 
