@@ -8,11 +8,17 @@ A desktop YouTube video/audio downloader with a dark, red-accented UI, built in 
 
 ## Features
 
+![Main Interface](main_ui.png)
+
 - **Video downloads** from 720p up to 4K (2160p), via yt-dlp
 - **Audio-only extraction** to MP3 / M4A, including high-bitrate options
 - **Video clipping** — grab video length, then pick a start/end range with sliders instead of downloading the whole video
 - **Live progress bar** with downloads running on a background thread, so the UI never freezes
 - **Custom dark/red theme**, with an accent color of `#E53E3E`, and a red title bar on Windows 11
+
+| Video quality | Audio quality | Clipping |
+|---|---|---|
+| ![Video Quality](video_quality.png) | ![Audio Quality](audio_quality.png) | ![Clipping Tool](cliping.png) |
 
 ---
 
